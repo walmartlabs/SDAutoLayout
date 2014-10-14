@@ -38,40 +38,40 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#pragma mark ALAttributes
+#pragma mark SDALAttributes
 
 /** Constants that represent edges of a view. */
-typedef NS_ENUM(NSInteger, ALEdge) {
+typedef NS_ENUM(NSInteger, SDALEdge) {
     /** The left edge of the view. */
-    ALEdgeLeft = NSLayoutAttributeLeft,
+    SDALEdgeLeft = NSLayoutAttributeLeft,
     /** The right edge of the view. */
-    ALEdgeRight = NSLayoutAttributeRight,
+    SDALEdgeRight = NSLayoutAttributeRight,
     /** The top edge of the view. */
-    ALEdgeTop = NSLayoutAttributeTop,
+    SDALEdgeTop = NSLayoutAttributeTop,
     /** The bottom edge of the view. */
-    ALEdgeBottom = NSLayoutAttributeBottom,
+    SDALEdgeBottom = NSLayoutAttributeBottom,
     /** The leading edge of the view (left edge for left-to-right languages like English, right edge for right-to-left languages like Arabic). */
-    ALEdgeLeading = NSLayoutAttributeLeading,
+    SDALEdgeLeading = NSLayoutAttributeLeading,
     /** The trailing edge of the view (right edge for left-to-right languages like English, left edge for right-to-left languages like Arabic). */
-    ALEdgeTrailing = NSLayoutAttributeTrailing
+    SDALEdgeTrailing = NSLayoutAttributeTrailing
 };
 
 /** Constants that represent dimensions of a view. */
-typedef NS_ENUM(NSInteger, ALDimension) {
+typedef NS_ENUM(NSInteger, SDALDimension) {
     /** The width of the view. */
-    ALDimensionWidth = NSLayoutAttributeWidth,
+    SDALDimensionWidth = NSLayoutAttributeWidth,
     /** The height of the view. */
-    ALDimensionHeight = NSLayoutAttributeHeight
+    SDALDimensionHeight = NSLayoutAttributeHeight
 };
 
 /** Constants that represent axes of a view. */
-typedef NS_ENUM(NSInteger, ALAxis) {
+typedef NS_ENUM(NSInteger, SDALAxis) {
     /** A vertical line through the center of the view. */
-    ALAxisVertical = NSLayoutAttributeCenterX,
+    SDALAxisVertical = NSLayoutAttributeCenterX,
     /** A horizontal line through the center of the view. */
-    ALAxisHorizontal = NSLayoutAttributeCenterY,
+    SDALAxisHorizontal = NSLayoutAttributeCenterY,
     /** A horizontal line at the text baseline (not applicable to all views). */
-    ALAxisBaseline = NSLayoutAttributeBaseline
+    SDALAxisBaseline = NSLayoutAttributeBaseline
 };
 
 /** A block containing method calls to the SDAutoLayout API. Takes no arguments and has no return value. */

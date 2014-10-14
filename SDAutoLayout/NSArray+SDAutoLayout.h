@@ -47,33 +47,33 @@
 #pragma mark Constrain Multiple Views
 
 /** Aligns views in this array to one another along a given edge. */
-- (NSArray *)sdal_alignViewsToEdge:(ALEdge)edge;
+- (NSArray *)sdal_alignViewsToEdge:(SDALEdge)edge;
 
 /** Aligns views in this array to one another along a given axis. */
-- (NSArray *)sdal_alignViewsToAxis:(ALAxis)axis;
+- (NSArray *)sdal_alignViewsToAxis:(SDALAxis)axis;
 
 /** Matches a given dimension of all the views in this array. */
-- (NSArray *)sdal_matchViewsDimension:(ALDimension)dimension;
+- (NSArray *)sdal_matchViewsDimension:(SDALDimension)dimension;
 
 /** Sets the given dimension of all the views in this array to a given size. */
-- (NSArray *)sdal_setViewsDimension:(ALDimension)dimension toSize:(CGFloat)size;
+- (NSArray *)sdal_setViewsDimension:(SDALDimension)dimension toSize:(CGFloat)size;
 
 
 #pragma mark Distribute Multiple Views
 
 /** Distributes the views in this array equally along the selected axis in their superview. Views will be the same size (variable) in the dimension along the axis and will have spacing (fixed) between them. */
-- (NSArray *)sdal_distributeViewsAlongAxis:(ALAxis)axis withFixedSpacing:(CGFloat)spacing alignment:(NSLayoutFormatOptions)alignment;
+- (NSArray *)sdal_distributeViewsAlongAxis:(SDALAxis)axis withFixedSpacing:(CGFloat)spacing alignment:(NSLayoutFormatOptions)alignment;
 
 /** Distributes the views in this array equally along the selected axis in their superview. Views will be the same size (variable) in the dimension along the axis and will have spacing (fixed) between them, with optional insets from the first and last views to their superview. */
-- (NSArray *)sdal_distributeViewsAlongAxis:(ALAxis)axis withFixedSpacing:(CGFloat)spacing insetSpacing:(BOOL)shouldSpaceInsets alignment:(NSLayoutFormatOptions)alignment;
+- (NSArray *)sdal_distributeViewsAlongAxis:(SDALAxis)axis withFixedSpacing:(CGFloat)spacing insetSpacing:(BOOL)shouldSpaceInsets alignment:(NSLayoutFormatOptions)alignment;
 
 /** Distributes the views in this array equally along the selected axis in their superview. Views will have spacing (fixed) between them, with optional insets from the first and last views to their superview, and optionally constrained to the same size in the dimension along the axis. */
-- (NSArray *)sdal_distributeViewsAlongAxis:(ALAxis)axis withFixedSpacing:(CGFloat)spacing insetSpacing:(BOOL)shouldSpaceInsets matchedSizes:(BOOL)shouldMatchSizes alignment:(NSLayoutFormatOptions)alignment;
+- (NSArray *)sdal_distributeViewsAlongAxis:(SDALAxis)axis withFixedSpacing:(CGFloat)spacing insetSpacing:(BOOL)shouldSpaceInsets matchedSizes:(BOOL)shouldMatchSizes alignment:(NSLayoutFormatOptions)alignment;
 
 /** Distributes the views in this array equally along the selected axis in their superview. Views will be the same size (fixed) in the dimension along the axis and will have spacing (variable) between them. */
-- (NSArray *)sdal_distributeViewsAlongAxis:(ALAxis)axis withFixedSize:(CGFloat)size alignment:(NSLayoutFormatOptions)alignment;
+- (NSArray *)sdal_distributeViewsAlongAxis:(SDALAxis)axis withFixedSize:(CGFloat)size alignment:(NSLayoutFormatOptions)alignment;
 
 /** Distributes the views in this array equally along the selected axis in their superview. Views will be the same size (fixed) in the dimension along the axis and will have spacing (variable) between them, with optional insets from the first and last views to their superview. */
-- (NSArray *)sdal_distributeViewsAlongAxis:(ALAxis)axis withFixedSize:(CGFloat)size insetSpacing:(BOOL)shouldSpaceInsets alignment:(NSLayoutFormatOptions)alignment;
+- (NSArray *)sdal_distributeViewsAlongAxis:(SDALAxis)axis withFixedSize:(CGFloat)size insetSpacing:(BOOL)shouldSpaceInsets alignment:(NSLayoutFormatOptions)alignment;
 
 @end

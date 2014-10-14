@@ -53,7 +53,7 @@
  @param edge The edge to which the subviews will be aligned.
  @return An array of constraints added.
  */
-- (NSArray *)sdal_alignViewsToEdge:(ALEdge)edge
+- (NSArray *)sdal_alignViewsToEdge:(SDALEdge)edge
 {
     NSAssert([self al_containsMinimumNumberOfViews:2], @"This array must contain at least 2 views.");
     NSMutableArray *constraints = [NSMutableArray new];
@@ -78,7 +78,7 @@
  @param axis The axis to which to subviews will be aligned.
  @return An array of constraints added.
  */
-- (NSArray *)sdal_alignViewsToAxis:(ALAxis)axis
+- (NSArray *)sdal_alignViewsToAxis:(SDALAxis)axis
 {
     NSAssert([self al_containsMinimumNumberOfViews:2], @"This array must contain at least 2 views.");
     NSMutableArray *constraints = [NSMutableArray new];
@@ -103,7 +103,7 @@
  @param dimension The dimension to match for all of the subviews.
  @return An array of constraints added.
  */
-- (NSArray *)sdal_matchViewsDimension:(ALDimension)dimension
+- (NSArray *)sdal_matchViewsDimension:(SDALDimension)dimension
 {
     NSAssert([self al_containsMinimumNumberOfViews:2], @"This array must contain at least 2 views.");
     NSMutableArray *constraints = [NSMutableArray new];
@@ -129,7 +129,7 @@
  @param size The size to set the given dimension of each subview to.
  @return An array of constraints added.
  */
-- (NSArray *)sdal_setViewsDimension:(ALDimension)dimension toSize:(CGFloat)size
+- (NSArray *)sdal_setViewsDimension:(SDALDimension)dimension toSize:(CGFloat)size
 {
     NSAssert([self al_containsMinimumNumberOfViews:1], @"This array must contain at least 1 view.");
     NSMutableArray *constraints = [NSMutableArray new];
@@ -156,7 +156,7 @@
  @param alignment The way in which the subviews will be aligned.
  @return An array of constraints added.
  */
-- (NSArray *)sdal_distributeViewsAlongAxis:(ALAxis)axis withFixedSpacing:(CGFloat)spacing alignment:(NSLayoutFormatOptions)alignment
+- (NSArray *)sdal_distributeViewsAlongAxis:(SDALAxis)axis withFixedSpacing:(CGFloat)spacing alignment:(NSLayoutFormatOptions)alignment
 {
     return [self sdal_distributeViewsAlongAxis:axis withFixedSpacing:spacing insetSpacing:YES alignment:alignment];
 }
@@ -172,7 +172,7 @@
  @param alignment The way in which the subviews will be aligned.
  @return An array of constraints added.
  */
-- (NSArray *)sdal_distributeViewsAlongAxis:(ALAxis)axis withFixedSpacing:(CGFloat)spacing insetSpacing:(BOOL)shouldSpaceInsets alignment:(NSLayoutFormatOptions)alignment
+- (NSArray *)sdal_distributeViewsAlongAxis:(SDALAxis)axis withFixedSpacing:(CGFloat)spacing insetSpacing:(BOOL)shouldSpaceInsets alignment:(NSLayoutFormatOptions)alignment
 {
     return [self sdal_distributeViewsAlongAxis:axis withFixedSpacing:spacing insetSpacing:shouldSpaceInsets matchedSizes:YES alignment:alignment];
 }
@@ -190,25 +190,25 @@
  @param alignment The way in which the subviews will be aligned.
  @return An array of constraints added.
  */
-- (NSArray *)sdal_distributeViewsAlongAxis:(ALAxis)axis withFixedSpacing:(CGFloat)spacing insetSpacing:(BOOL)shouldSpaceInsets matchedSizes:(BOOL)shouldMatchSizes alignment:(NSLayoutFormatOptions)alignment
+- (NSArray *)sdal_distributeViewsAlongAxis:(SDALAxis)axis withFixedSpacing:(CGFloat)spacing insetSpacing:(BOOL)shouldSpaceInsets matchedSizes:(BOOL)shouldMatchSizes alignment:(NSLayoutFormatOptions)alignment
 {
     NSAssert([self al_containsMinimumNumberOfViews:2], @"This array must contain at least 2 views to distribute.");
-    ALDimension matchedDimension;
-    ALEdge firstEdge, lastEdge;
+    SDALDimension matchedDimension;
+    SDALEdge firstEdge, lastEdge;
     switch (axis) {
-        case ALAxisHorizontal:
-        case ALAxisBaseline:
-            matchedDimension = ALDimensionWidth;
-            firstEdge = ALEdgeLeading;
-            lastEdge = ALEdgeTrailing;
+        case SDALAxisHorizontal:
+        case SDALAxisBaseline:
+            matchedDimension = SDALDimensionWidth;
+            firstEdge = SDALEdgeLeading;
+            lastEdge = SDALEdgeTrailing;
             break;
-        case ALAxisVertical:
-            matchedDimension = ALDimensionHeight;
-            firstEdge = ALEdgeTop;
-            lastEdge = ALEdgeBottom;
+        case SDALAxisVertical:
+            matchedDimension = SDALDimensionHeight;
+            firstEdge = SDALEdgeTop;
+            lastEdge = SDALEdgeBottom;
             break;
         default:
-            NSAssert(nil, @"Not a valid ALAxis.");
+            NSAssert(nil, @"Not a valid SDALAxis.");
             return nil;
     }
     CGFloat leadingSpacing = shouldSpaceInsets ? spacing : 0.0;
@@ -252,7 +252,7 @@
  @param alignment The way in which the subviews will be aligned.
  @return An array of constraints added.
  */
-- (NSArray *)sdal_distributeViewsAlongAxis:(ALAxis)axis withFixedSize:(CGFloat)size alignment:(NSLayoutFormatOptions)alignment
+- (NSArray *)sdal_distributeViewsAlongAxis:(SDALAxis)axis withFixedSize:(CGFloat)size alignment:(NSLayoutFormatOptions)alignment
 {
     return [self sdal_distributeViewsAlongAxis:axis withFixedSize:size insetSpacing:YES alignment:alignment];
 }
@@ -268,27 +268,27 @@
  @param alignment The way in which the subviews will be aligned.
  @return An array of constraints added.
  */
-- (NSArray *)sdal_distributeViewsAlongAxis:(ALAxis)axis withFixedSize:(CGFloat)size insetSpacing:(BOOL)shouldSpaceInsets alignment:(NSLayoutFormatOptions)alignment
+- (NSArray *)sdal_distributeViewsAlongAxis:(SDALAxis)axis withFixedSize:(CGFloat)size insetSpacing:(BOOL)shouldSpaceInsets alignment:(NSLayoutFormatOptions)alignment
 {
     NSAssert([self al_containsMinimumNumberOfViews:2], @"This array must contain at least 2 views to distribute.");
-    ALDimension fixedDimension;
+    SDALDimension fixedDimension;
     NSLayoutAttribute attribute;
     switch (axis) {
-        case ALAxisHorizontal:
-        case ALAxisBaseline:
-            fixedDimension = ALDimensionWidth;
+        case SDALAxisHorizontal:
+        case SDALAxisBaseline:
+            fixedDimension = SDALDimensionWidth;
             attribute = NSLayoutAttributeCenterX;
             break;
-        case ALAxisVertical:
-            fixedDimension = ALDimensionHeight;
+        case SDALAxisVertical:
+            fixedDimension = SDALDimensionHeight;
             attribute = NSLayoutAttributeCenterY;
             break;
         default:
-            NSAssert(nil, @"Not a valid ALAxis.");
+            NSAssert(nil, @"Not a valid SDALAxis.");
             return nil;
     }
     BOOL isRightToLeftLanguage = [NSLocale characterDirectionForLanguage:[[NSBundle mainBundle] preferredLocalizations][0]] == NSLocaleLanguageDirectionRightToLeft;
-    BOOL shouldFlipOrder = isRightToLeftLanguage && (axis != ALAxisVertical); // imitate the effect of leading/trailing when distributing horizontally
+    BOOL shouldFlipOrder = isRightToLeftLanguage && (axis != SDALAxisVertical); // imitate the effect of leading/trailing when distributing horizontally
     
     NSMutableArray *constraints = [NSMutableArray new];
     NSArray *views = [self al_copyViewsOnly];

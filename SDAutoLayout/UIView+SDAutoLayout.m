@@ -227,8 +227,8 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
 - (NSArray *)sdal_centerInSuperview
 {
     NSMutableArray *constraints = [NSMutableArray new];
-    [constraints addObject:[self sdal_alignAxisToSuperviewAxis:ALAxisHorizontal]];
-    [constraints addObject:[self sdal_alignAxisToSuperviewAxis:ALAxisVertical]];
+    [constraints addObject:[self sdal_alignAxisToSuperviewAxis:SDALAxisHorizontal]];
+    [constraints addObject:[self sdal_alignAxisToSuperviewAxis:SDALAxisVertical]];
     return constraints;
 }
 
@@ -238,7 +238,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param axis The axis of this view and of its superview to align.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_alignAxisToSuperviewAxis:(ALAxis)axis
+- (NSLayoutConstraint *)sdal_alignAxisToSuperviewAxis:(SDALAxis)axis
 {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     UIView *superview = self.superview;
@@ -258,7 +258,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param edge The edge of this view and its superview to pin.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_pinEdgeToSuperviewEdge:(ALEdge)edge
+- (NSLayoutConstraint *)sdal_pinEdgeToSuperviewEdge:(SDALEdge)edge
 {
     return [self sdal_pinEdgeToSuperviewEdge:edge withInset:0.0];
 }
@@ -270,7 +270,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param inset The amount to inset this view's edge from the superview's edge.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_pinEdgeToSuperviewEdge:(ALEdge)edge withInset:(CGFloat)inset
+- (NSLayoutConstraint *)sdal_pinEdgeToSuperviewEdge:(SDALEdge)edge withInset:(CGFloat)inset
 {
     return [self sdal_pinEdgeToSuperviewEdge:edge withInset:inset relation:NSLayoutRelationEqual];
 }
@@ -283,12 +283,12 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param relation Whether the inset should be at least, at most, or exactly equal to the given value.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_pinEdgeToSuperviewEdge:(ALEdge)edge withInset:(CGFloat)inset relation:(NSLayoutRelation)relation
+- (NSLayoutConstraint *)sdal_pinEdgeToSuperviewEdge:(SDALEdge)edge withInset:(CGFloat)inset relation:(NSLayoutRelation)relation
 {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     UIView *superview = self.superview;
     NSAssert(superview, @"View's superview must not be nil.\nView: %@", self);
-    if (edge == ALEdgeBottom || edge == ALEdgeRight || edge == ALEdgeTrailing) {
+    if (edge == SDALEdgeBottom || edge == SDALEdgeRight || edge == SDALEdgeTrailing) {
         // The bottom, right, and trailing insets (and relations, if an inequality) are inverted to become offsets
         inset = -inset;
         if (relation == NSLayoutRelationLessThanOrEqual) {
@@ -310,10 +310,10 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
 - (NSArray *)sdal_pinEdgesToSuperviewEdgesWithInsets:(UIEdgeInsets)insets
 {
     NSMutableArray *constraints = [NSMutableArray new];
-    [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:ALEdgeTop withInset:insets.top]];
-    [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:ALEdgeLeading withInset:insets.left]];
-    [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:ALEdgeBottom withInset:insets.bottom]];
-    [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:ALEdgeTrailing withInset:insets.right]];
+    [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:SDALEdgeTop withInset:insets.top]];
+    [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:SDALEdgeLeading withInset:insets.left]];
+    [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:SDALEdgeBottom withInset:insets.bottom]];
+    [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:SDALEdgeTrailing withInset:insets.right]];
     return constraints;
 }
 
@@ -326,20 +326,20 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param edge The edge of this view to exclude in pinning to its superview; this method will not apply any constraint to it.
  @return An array of constraints added.
  */
-- (NSArray *)sdal_pinEdgesToSuperviewEdgesWithInsets:(UIEdgeInsets)insets excludingEdge:(ALEdge)edge
+- (NSArray *)sdal_pinEdgesToSuperviewEdgesWithInsets:(UIEdgeInsets)insets excludingEdge:(SDALEdge)edge
 {
     NSMutableArray *constraints = [NSMutableArray new];
-    if (edge != ALEdgeTop) {
-        [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:ALEdgeTop withInset:insets.top]];
+    if (edge != SDALEdgeTop) {
+        [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:SDALEdgeTop withInset:insets.top]];
     }
-    if (edge != ALEdgeLeading && edge != ALEdgeLeft) {
-        [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:ALEdgeLeading withInset:insets.left]];
+    if (edge != SDALEdgeLeading && edge != SDALEdgeLeft) {
+        [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:SDALEdgeLeading withInset:insets.left]];
     }
-    if (edge != ALEdgeBottom) {
-        [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:ALEdgeBottom withInset:insets.bottom]];
+    if (edge != SDALEdgeBottom) {
+        [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:SDALEdgeBottom withInset:insets.bottom]];
     }
-    if (edge != ALEdgeTrailing && edge != ALEdgeRight) {
-        [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:ALEdgeTrailing withInset:insets.right]];
+    if (edge != SDALEdgeTrailing && edge != SDALEdgeRight) {
+        [constraints addObject:[self sdal_pinEdgeToSuperviewEdge:SDALEdgeTrailing withInset:insets.right]];
     }
     return constraints;
 }
@@ -355,7 +355,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param peerView The peer view to pin to. Must be in the same view hierarchy as this view.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_pinEdge:(ALEdge)edge toEdge:(ALEdge)toEdge ofView:(UIView *)peerView
+- (NSLayoutConstraint *)sdal_pinEdge:(SDALEdge)edge toEdge:(SDALEdge)toEdge ofView:(UIView *)peerView
 {
     return [self sdal_pinEdge:edge toEdge:toEdge ofView:peerView withOffset:0.0];
 }
@@ -369,7 +369,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param offset The offset between the edge of this view and the edge of the peer view.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_pinEdge:(ALEdge)edge toEdge:(ALEdge)toEdge ofView:(UIView *)peerView withOffset:(CGFloat)offset
+- (NSLayoutConstraint *)sdal_pinEdge:(SDALEdge)edge toEdge:(SDALEdge)toEdge ofView:(UIView *)peerView withOffset:(CGFloat)offset
 {
     return [self sdal_pinEdge:edge toEdge:toEdge ofView:peerView withOffset:offset relation:NSLayoutRelationEqual];
 }
@@ -384,7 +384,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param relation Whether the offset should be at least, at most, or exactly equal to the given value.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_pinEdge:(ALEdge)edge toEdge:(ALEdge)toEdge ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation
+- (NSLayoutConstraint *)sdal_pinEdge:(SDALEdge)edge toEdge:(SDALEdge)toEdge ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation
 {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutAttribute attribute = [UIView al_attributeForEdge:edge];
@@ -404,7 +404,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param peerView The peer view to align to. Must be in the same view hierarchy as this view.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_alignAxis:(ALAxis)axis toSameAxisOfView:(UIView *)peerView
+- (NSLayoutConstraint *)sdal_alignAxis:(SDALAxis)axis toSameAxisOfView:(UIView *)peerView
 {
     return [self sdal_alignAxis:axis toSameAxisOfView:peerView withOffset:0.0];
 }
@@ -417,7 +417,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param offset The offset between the axis of this view and the axis of the peer view.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_alignAxis:(ALAxis)axis toSameAxisOfView:(UIView *)peerView withOffset:(CGFloat)offset
+- (NSLayoutConstraint *)sdal_alignAxis:(SDALAxis)axis toSameAxisOfView:(UIView *)peerView withOffset:(CGFloat)offset
 {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutAttribute attribute = [UIView al_attributeForAxis:axis];
@@ -437,7 +437,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param peerView The peer view to match to. Must be in the same view hierarchy as this view.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_matchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView
+- (NSLayoutConstraint *)sdal_matchDimension:(SDALDimension)dimension toDimension:(SDALDimension)toDimension ofView:(UIView *)peerView
 {
     return [self sdal_matchDimension:dimension toDimension:toDimension ofView:peerView withOffset:0.0];
 }
@@ -451,7 +451,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param offset The offset between the dimension of this view and the dimension of the peer view.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_matchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView withOffset:(CGFloat)offset
+- (NSLayoutConstraint *)sdal_matchDimension:(SDALDimension)dimension toDimension:(SDALDimension)toDimension ofView:(UIView *)peerView withOffset:(CGFloat)offset
 {
     return [self sdal_matchDimension:dimension toDimension:toDimension ofView:peerView withOffset:offset relation:NSLayoutRelationEqual];
 }
@@ -466,7 +466,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param relation Whether the offset should be at least, at most, or exactly equal to the given value.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_matchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation
+- (NSLayoutConstraint *)sdal_matchDimension:(SDALDimension)dimension toDimension:(SDALDimension)toDimension ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation
 {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutAttribute attribute = [UIView al_attributeForDimension:dimension];
@@ -485,7 +485,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param multiplier The multiple of the peer view's given dimension that this view's given dimension should be.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_matchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier
+- (NSLayoutConstraint *)sdal_matchDimension:(SDALDimension)dimension toDimension:(SDALDimension)toDimension ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier
 {
     return [self sdal_matchDimension:dimension toDimension:toDimension ofView:peerView withMultiplier:multiplier relation:NSLayoutRelationEqual];
 }
@@ -500,7 +500,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param relation Whether the multiple should be at least, at most, or exactly equal to the given value.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_matchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier relation:(NSLayoutRelation)relation
+- (NSLayoutConstraint *)sdal_matchDimension:(SDALDimension)dimension toDimension:(SDALDimension)toDimension ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier relation:(NSLayoutRelation)relation
 {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutAttribute attribute = [UIView al_attributeForDimension:dimension];
@@ -522,8 +522,8 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
 - (NSArray *)sdal_setDimensionsToSize:(CGSize)size
 {
     NSMutableArray *constraints = [NSMutableArray new];
-    [constraints addObject:[self sdal_setDimension:ALDimensionWidth toSize:size.width]];
-    [constraints addObject:[self sdal_setDimension:ALDimensionHeight toSize:size.height]];
+    [constraints addObject:[self sdal_setDimension:SDALDimensionWidth toSize:size.width]];
+    [constraints addObject:[self sdal_setDimension:SDALDimensionHeight toSize:size.height]];
     return constraints;
 }
 
@@ -534,7 +534,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param size The size to set the given dimension to.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_setDimension:(ALDimension)dimension toSize:(CGFloat)size
+- (NSLayoutConstraint *)sdal_setDimension:(SDALDimension)dimension toSize:(CGFloat)size
 {
     return [self sdal_setDimension:dimension toSize:size relation:NSLayoutRelationEqual];
 }
@@ -547,7 +547,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param relation Whether the size should be at least, at most, or exactly equal to the given value.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_setDimension:(ALDimension)dimension toSize:(CGFloat)size relation:(NSLayoutRelation)relation
+- (NSLayoutConstraint *)sdal_setDimension:(SDALDimension)dimension toSize:(CGFloat)size relation:(NSLayoutRelation)relation
 {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutAttribute attribute = [UIView al_attributeForDimension:dimension];
@@ -565,7 +565,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  
  @param axis The axis to set the content compression resistance priority for.
  */
-- (void)sdal_setContentCompressionResistancePriorityForAxis:(ALAxis)axis
+- (void)sdal_setContentCompressionResistancePriorityForAxis:(SDALAxis)axis
 {
     NSAssert(_al_isExecutingConstraintsBlock, @"%@ should only be called from within the block passed into the method +[autoSetPriority:forConstraints:]", NSStringFromSelector(_cmd));
     if (_al_isExecutingConstraintsBlock) {
@@ -581,7 +581,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  
  @param axis The axis to set the content hugging priority for.
  */
-- (void)sdal_setContentHuggingPriorityForAxis:(ALAxis)axis
+- (void)sdal_setContentHuggingPriorityForAxis:(SDALAxis)axis
 {
     NSAssert(_al_isExecutingConstraintsBlock, @"%@ should only be called from within the block passed into the method +[autoSetPriority:forConstraints:]", NSStringFromSelector(_cmd));
     if (_al_isExecutingConstraintsBlock) {
@@ -595,86 +595,86 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
 #pragma mark Constrain Any Attributes
 
 /**
- Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view.
+ Constrains an attribute (any SDALEdge, SDALAxis, or SDALDimension) of the view to a given attribute of another view.
  This method can be used to constrain different types of attributes across two views.
  
- @param ALAttribute Any ALEdge, ALAxis, or ALDimension of this view to constrain.
- @param toALAttribute Any ALEdge, ALAxis, or ALDimension of the peer view to constrain to.
+ @param SDALAttribute Any SDALEdge, SDALAxis, or SDALDimension of this view to constrain.
+ @param toSDALAttribute Any SDALEdge, SDALAxis, or SDALDimension of the peer view to constrain to.
  @param peerView The peer view to constrain to. Must be in the same view hierarchy as this view.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)ALAttribute toAttribute:(NSInteger)toALAttribute ofView:(UIView *)peerView
+- (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)SDALAttribute toAttribute:(NSInteger)toSDALAttribute ofView:(UIView *)peerView
 {
-    return [self sdal_constrainAttribute:ALAttribute toAttribute:toALAttribute ofView:peerView withOffset:0.0];
+    return [self sdal_constrainAttribute:SDALAttribute toAttribute:toSDALAttribute ofView:peerView withOffset:0.0];
 }
 
 /**
- Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view with an offset.
+ Constrains an attribute (any SDALEdge, SDALAxis, or SDALDimension) of the view to a given attribute of another view with an offset.
  This method can be used to constrain different types of attributes across two views.
  
- @param ALAttribute Any ALEdge, ALAxis, or ALDimension of this view to constrain.
- @param toALAttribute Any ALEdge, ALAxis, or ALDimension of the peer view to constrain to.
+ @param SDALAttribute Any SDALEdge, SDALAxis, or SDALDimension of this view to constrain.
+ @param toSDALAttribute Any SDALEdge, SDALAxis, or SDALDimension of the peer view to constrain to.
  @param peerView The peer view to constrain to. Must be in the same view hierarchy as this view.
  @param offset The offset between the attribute of this view and the attribute of the peer view.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)ALAttribute toAttribute:(NSInteger)toALAttribute ofView:(UIView *)peerView withOffset:(CGFloat)offset
+- (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)SDALAttribute toAttribute:(NSInteger)toSDALAttribute ofView:(UIView *)peerView withOffset:(CGFloat)offset
 {
-    return [self sdal_constrainAttribute:ALAttribute toAttribute:toALAttribute ofView:peerView withOffset:offset relation:NSLayoutRelationEqual];
+    return [self sdal_constrainAttribute:SDALAttribute toAttribute:toSDALAttribute ofView:peerView withOffset:offset relation:NSLayoutRelationEqual];
 }
 
 /**
- Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view with an offset as a maximum or minimum.
+ Constrains an attribute (any SDALEdge, SDALAxis, or SDALDimension) of the view to a given attribute of another view with an offset as a maximum or minimum.
  This method can be used to constrain different types of attributes across two views.
  
- @param ALAttribute Any ALEdge, ALAxis, or ALDimension of this view to constrain.
- @param toALAttribute Any ALEdge, ALAxis, or ALDimension of the peer view to constrain to.
+ @param SDALAttribute Any SDALEdge, SDALAxis, or SDALDimension of this view to constrain.
+ @param toSDALAttribute Any SDALEdge, SDALAxis, or SDALDimension of the peer view to constrain to.
  @param peerView The peer view to constrain to. Must be in the same view hierarchy as this view.
  @param offset The offset between the attribute of this view and the attribute of the peer view.
  @param relation Whether the offset should be at least, at most, or exactly equal to the given value.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)ALAttribute toAttribute:(NSInteger)toALAttribute ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation
+- (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)SDALAttribute toAttribute:(NSInteger)toSDALAttribute ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation
 {
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutAttribute attribute = [UIView al_attributeForALAttribute:ALAttribute];
-    NSLayoutAttribute toAttribute = [UIView al_attributeForALAttribute:toALAttribute];
+    NSLayoutAttribute attribute = [UIView al_attributeForSDALAttribute:SDALAttribute];
+    NSLayoutAttribute toAttribute = [UIView al_attributeForSDALAttribute:toSDALAttribute];
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:attribute relatedBy:relation toItem:peerView attribute:toAttribute multiplier:1.0 constant:offset];
     [constraint sdal_install];
     return constraint;
 }
 
 /**
- Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view with a multiplier.
+ Constrains an attribute (any SDALEdge, SDALAxis, or SDALDimension) of the view to a given attribute of another view with a multiplier.
  This method can be used to constrain different types of attributes across two views.
  
- @param ALAttribute Any ALEdge, ALAxis, or ALDimension of this view to constrain.
- @param toALAttribute Any ALEdge, ALAxis, or ALDimension of the peer view to constrain to.
+ @param SDALAttribute Any SDALEdge, SDALAxis, or SDALDimension of this view to constrain.
+ @param toSDALAttribute Any SDALEdge, SDALAxis, or SDALDimension of the peer view to constrain to.
  @param peerView The peer view to constrain to. Must be in the same view hierarchy as this view.
  @param multiplier The multiplier between the attribute of this view and the attribute of the peer view.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)ALAttribute toAttribute:(NSInteger)toALAttribute ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier
+- (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)SDALAttribute toAttribute:(NSInteger)toSDALAttribute ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier
 {
-    return [self sdal_constrainAttribute:ALAttribute toAttribute:toALAttribute ofView:peerView withMultiplier:multiplier relation:NSLayoutRelationEqual];
+    return [self sdal_constrainAttribute:SDALAttribute toAttribute:toSDALAttribute ofView:peerView withMultiplier:multiplier relation:NSLayoutRelationEqual];
 }
 
 /**
- Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view with a multiplier as a maximum or minimum.
+ Constrains an attribute (any SDALEdge, SDALAxis, or SDALDimension) of the view to a given attribute of another view with a multiplier as a maximum or minimum.
  This method can be used to constrain different types of attributes across two views.
  
- @param ALAttribute Any ALEdge, ALAxis, or ALDimension of this view to constrain.
- @param toALAttribute Any ALEdge, ALAxis, or ALDimension of the peer view to constrain to.
+ @param SDALAttribute Any SDALEdge, SDALAxis, or SDALDimension of this view to constrain.
+ @param toSDALAttribute Any SDALEdge, SDALAxis, or SDALDimension of the peer view to constrain to.
  @param peerView The peer view to constrain to. Must be in the same view hierarchy as this view.
  @param multiplier The multiplier between the attribute of this view and the attribute of the peer view.
  @param relation Whether the multiplier should be at least, at most, or exactly equal to the given value.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)ALAttribute toAttribute:(NSInteger)toALAttribute ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier relation:(NSLayoutRelation)relation
+- (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)SDALAttribute toAttribute:(NSInteger)toSDALAttribute ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier relation:(NSLayoutRelation)relation
 {
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutAttribute attribute = [UIView al_attributeForALAttribute:ALAttribute];
-    NSLayoutAttribute toAttribute = [UIView al_attributeForALAttribute:toALAttribute];
+    NSLayoutAttribute attribute = [UIView al_attributeForSDALAttribute:SDALAttribute];
+    NSLayoutAttribute toAttribute = [UIView al_attributeForSDALAttribute:toSDALAttribute];
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:attribute relatedBy:relation toItem:peerView attribute:toAttribute multiplier:multiplier constant:0.0];
     [constraint sdal_install];
     return constraint;
@@ -695,7 +695,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
 - (NSLayoutConstraint *)sdal_pinToTopLayoutGuideOfViewController:(UIViewController *)viewController withInset:(CGFloat)inset
 {
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        return [self sdal_pinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:viewController.view withOffset:inset];
+        return [self sdal_pinEdge:SDALEdgeTop toEdge:SDALEdgeTop ofView:viewController.view withOffset:inset];
     } else {
         self.translatesAutoresizingMaskIntoConstraints = NO;
         NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:viewController.topLayoutGuide attribute:NSLayoutAttributeBottom multiplier:1.0 constant:inset];
@@ -716,7 +716,7 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
 - (NSLayoutConstraint *)sdal_pinToBottomLayoutGuideOfViewController:(UIViewController *)viewController withInset:(CGFloat)inset
 {
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        return [self sdal_pinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:viewController.view withOffset:-inset];
+        return [self sdal_pinEdge:SDALEdgeBottom toEdge:SDALEdgeBottom ofView:viewController.view withOffset:-inset];
     } else {
         self.translatesAutoresizingMaskIntoConstraints = NO;
         NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:viewController.bottomLayoutGuide attribute:NSLayoutAttributeTop multiplier:1.0 constant:-inset];
@@ -743,153 +743,153 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
 }
 
 /**
- Returns the corresponding NSLayoutAttribute for the given ALEdge.
+ Returns the corresponding NSLayoutAttribute for the given SDALEdge.
  
  @return The layout attribute for the given edge.
  */
-+ (NSLayoutAttribute)al_attributeForEdge:(ALEdge)edge
++ (NSLayoutAttribute)al_attributeForEdge:(SDALEdge)edge
 {
     NSLayoutAttribute attribute = NSLayoutAttributeNotAnAttribute;
     switch (edge) {
-        case ALEdgeLeft:
+        case SDALEdgeLeft:
             attribute = NSLayoutAttributeLeft;
             break;
-        case ALEdgeRight:
+        case SDALEdgeRight:
             attribute = NSLayoutAttributeRight;
             break;
-        case ALEdgeTop:
+        case SDALEdgeTop:
             attribute = NSLayoutAttributeTop;
             break;
-        case ALEdgeBottom:
+        case SDALEdgeBottom:
             attribute = NSLayoutAttributeBottom;
             break;
-        case ALEdgeLeading:
+        case SDALEdgeLeading:
             attribute = NSLayoutAttributeLeading;
             break;
-        case ALEdgeTrailing:
+        case SDALEdgeTrailing:
             attribute = NSLayoutAttributeTrailing;
             break;
         default:
-            NSAssert(nil, @"Not a valid ALEdge.");
+            NSAssert(nil, @"Not a valid SDALEdge.");
             break;
     }
     return attribute;
 }
 
 /**
- Returns the corresponding NSLayoutAttribute for the given ALAxis.
+ Returns the corresponding NSLayoutAttribute for the given SDALAxis.
  
  @return The layout attribute for the given axis.
  */
-+ (NSLayoutAttribute)al_attributeForAxis:(ALAxis)axis
++ (NSLayoutAttribute)al_attributeForAxis:(SDALAxis)axis
 {
     NSLayoutAttribute attribute = NSLayoutAttributeNotAnAttribute;
     switch (axis) {
-        case ALAxisVertical:
+        case SDALAxisVertical:
             attribute = NSLayoutAttributeCenterX;
             break;
-        case ALAxisHorizontal:
+        case SDALAxisHorizontal:
             attribute = NSLayoutAttributeCenterY;
             break;
-        case ALAxisBaseline:
+        case SDALAxisBaseline:
             attribute = NSLayoutAttributeBaseline;
             break;
         default:
-            NSAssert(nil, @"Not a valid ALAxis.");
+            NSAssert(nil, @"Not a valid SDALAxis.");
             break;
     }
     return attribute;
 }
 
 /**
- Returns the corresponding NSLayoutAttribute for the given ALDimension.
+ Returns the corresponding NSLayoutAttribute for the given SDALDimension.
  
  @return The layout attribute for the given dimension.
  */
-+ (NSLayoutAttribute)al_attributeForDimension:(ALDimension)dimension
++ (NSLayoutAttribute)al_attributeForDimension:(SDALDimension)dimension
 {
     NSLayoutAttribute attribute = NSLayoutAttributeNotAnAttribute;
     switch (dimension) {
-        case ALDimensionWidth:
+        case SDALDimensionWidth:
             attribute = NSLayoutAttributeWidth;
             break;
-        case ALDimensionHeight:
+        case SDALDimensionHeight:
             attribute = NSLayoutAttributeHeight;
             break;
         default:
-            NSAssert(nil, @"Not a valid ALDimension.");
+            NSAssert(nil, @"Not a valid SDALDimension.");
             break;
     }
     return attribute;
 }
 
 /**
- Returns the corresponding NSLayoutAttribute for the given ALAttribute.
+ Returns the corresponding NSLayoutAttribute for the given SDALAttribute.
  
- @return The layout attribute for the given ALAttribute.
+ @return The layout attribute for the given SDALAttribute.
  */
-+ (NSLayoutAttribute)al_attributeForALAttribute:(NSInteger)ALAttribute
++ (NSLayoutAttribute)al_attributeForSDALAttribute:(NSInteger)SDALAttribute
 {
     NSLayoutAttribute attribute = NSLayoutAttributeNotAnAttribute;
-    switch (ALAttribute) {
-        case ALEdgeLeft:
+    switch (SDALAttribute) {
+        case SDALEdgeLeft:
             attribute = NSLayoutAttributeLeft;
             break;
-        case ALEdgeRight:
+        case SDALEdgeRight:
             attribute = NSLayoutAttributeRight;
             break;
-        case ALEdgeTop:
+        case SDALEdgeTop:
             attribute = NSLayoutAttributeTop;
             break;
-        case ALEdgeBottom:
+        case SDALEdgeBottom:
             attribute = NSLayoutAttributeBottom;
             break;
-        case ALEdgeLeading:
+        case SDALEdgeLeading:
             attribute = NSLayoutAttributeLeading;
             break;
-        case ALEdgeTrailing:
+        case SDALEdgeTrailing:
             attribute = NSLayoutAttributeTrailing;
             break;
-        case ALDimensionWidth:
+        case SDALDimensionWidth:
             attribute = NSLayoutAttributeWidth;
             break;
-        case ALDimensionHeight:
+        case SDALDimensionHeight:
             attribute = NSLayoutAttributeHeight;
             break;
-        case ALAxisVertical:
+        case SDALAxisVertical:
             attribute = NSLayoutAttributeCenterX;
             break;
-        case ALAxisHorizontal:
+        case SDALAxisHorizontal:
             attribute = NSLayoutAttributeCenterY;
             break;
-        case ALAxisBaseline:
+        case SDALAxisBaseline:
             attribute = NSLayoutAttributeBaseline;
             break;
         default:
-            NSAssert(nil, @"Not a valid ALAttribute.");
+            NSAssert(nil, @"Not a valid SDALAttribute.");
             break;
     }
     return attribute;
 }
 
 /**
- Returns the corresponding UILayoutConstraintAxis for the given ALAxis.
+ Returns the corresponding UILayoutConstraintAxis for the given SDALAxis.
  
  @return The constraint axis for the given axis.
  */
-+ (UILayoutConstraintAxis)al_constraintAxisForAxis:(ALAxis)axis
++ (UILayoutConstraintAxis)al_constraintAxisForAxis:(SDALAxis)axis
 {
     UILayoutConstraintAxis constraintAxis;
     switch (axis) {
-        case ALAxisVertical:
+        case SDALAxisVertical:
             constraintAxis = UILayoutConstraintAxisVertical;
             break;
-        case ALAxisHorizontal:
-        case ALAxisBaseline:
+        case SDALAxisHorizontal:
+        case SDALAxisBaseline:
             constraintAxis = UILayoutConstraintAxisHorizontal;
             break;
         default:
-            NSAssert(nil, @"Not a valid ALAxis.");
+            NSAssert(nil, @"Not a valid SDALAxis.");
             break;
     }
     return constraintAxis;
@@ -923,45 +923,45 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
  @param axis The axis along which the views are distributed, used to validate the alignment option.
  @return The constraint added.
  */
-- (NSLayoutConstraint *)al_alignToView:(UIView *)peerView withOption:(NSLayoutFormatOptions)alignment forAxis:(ALAxis)axis
+- (NSLayoutConstraint *)al_alignToView:(UIView *)peerView withOption:(NSLayoutFormatOptions)alignment forAxis:(SDALAxis)axis
 {
     NSLayoutConstraint *constraint = nil;
     switch (alignment) {
         case NSLayoutFormatAlignAllCenterX:
-            NSAssert(axis == ALAxisVertical, @"Cannot align views that are distributed horizontally with NSLayoutFormatAlignAllCenterX.");
-            constraint = [self sdal_alignAxis:ALAxisVertical toSameAxisOfView:peerView];
+            NSAssert(axis == SDALAxisVertical, @"Cannot align views that are distributed horizontally with NSLayoutFormatAlignAllCenterX.");
+            constraint = [self sdal_alignAxis:SDALAxisVertical toSameAxisOfView:peerView];
             break;
         case NSLayoutFormatAlignAllCenterY:
-            NSAssert(axis != ALAxisVertical, @"Cannot align views that are distributed vertically with NSLayoutFormatAlignAllCenterY.");
-            constraint = [self sdal_alignAxis:ALAxisHorizontal toSameAxisOfView:peerView];
+            NSAssert(axis != SDALAxisVertical, @"Cannot align views that are distributed vertically with NSLayoutFormatAlignAllCenterY.");
+            constraint = [self sdal_alignAxis:SDALAxisHorizontal toSameAxisOfView:peerView];
             break;
         case NSLayoutFormatAlignAllBaseline:
-            NSAssert(axis != ALAxisVertical, @"Cannot align views that are distributed vertically with NSLayoutFormatAlignAllBaseline.");
-            constraint = [self sdal_alignAxis:ALAxisBaseline toSameAxisOfView:peerView];
+            NSAssert(axis != SDALAxisVertical, @"Cannot align views that are distributed vertically with NSLayoutFormatAlignAllBaseline.");
+            constraint = [self sdal_alignAxis:SDALAxisBaseline toSameAxisOfView:peerView];
             break;
         case NSLayoutFormatAlignAllTop:
-            NSAssert(axis != ALAxisVertical, @"Cannot align views that are distributed vertically with NSLayoutFormatAlignAllTop.");
-            constraint = [self sdal_pinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:peerView];
+            NSAssert(axis != SDALAxisVertical, @"Cannot align views that are distributed vertically with NSLayoutFormatAlignAllTop.");
+            constraint = [self sdal_pinEdge:SDALEdgeTop toEdge:SDALEdgeTop ofView:peerView];
             break;
         case NSLayoutFormatAlignAllLeft:
-            NSAssert(axis == ALAxisVertical, @"Cannot align views that are distributed horizontally with NSLayoutFormatAlignAllLeft.");
-            constraint = [self sdal_pinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:peerView];
+            NSAssert(axis == SDALAxisVertical, @"Cannot align views that are distributed horizontally with NSLayoutFormatAlignAllLeft.");
+            constraint = [self sdal_pinEdge:SDALEdgeLeft toEdge:SDALEdgeLeft ofView:peerView];
             break;
         case NSLayoutFormatAlignAllBottom:
-            NSAssert(axis != ALAxisVertical, @"Cannot align views that are distributed vertically with NSLayoutFormatAlignAllBottom.");
-            constraint = [self sdal_pinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:peerView];
+            NSAssert(axis != SDALAxisVertical, @"Cannot align views that are distributed vertically with NSLayoutFormatAlignAllBottom.");
+            constraint = [self sdal_pinEdge:SDALEdgeBottom toEdge:SDALEdgeBottom ofView:peerView];
             break;
         case NSLayoutFormatAlignAllRight:
-            NSAssert(axis == ALAxisVertical, @"Cannot align views that are distributed horizontally with NSLayoutFormatAlignAllRight.");
-            constraint = [self sdal_pinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:peerView];
+            NSAssert(axis == SDALAxisVertical, @"Cannot align views that are distributed horizontally with NSLayoutFormatAlignAllRight.");
+            constraint = [self sdal_pinEdge:SDALEdgeRight toEdge:SDALEdgeRight ofView:peerView];
             break;
         case NSLayoutFormatAlignAllLeading:
-            NSAssert(axis == ALAxisVertical, @"Cannot align views that are distributed horizontally with NSLayoutFormatAlignAllLeading.");
-            constraint = [self sdal_pinEdge:ALEdgeLeading toEdge:ALEdgeLeading ofView:peerView];
+            NSAssert(axis == SDALAxisVertical, @"Cannot align views that are distributed horizontally with NSLayoutFormatAlignAllLeading.");
+            constraint = [self sdal_pinEdge:SDALEdgeLeading toEdge:SDALEdgeLeading ofView:peerView];
             break;
         case NSLayoutFormatAlignAllTrailing:
-            NSAssert(axis == ALAxisVertical, @"Cannot align views that are distributed horizontally with NSLayoutFormatAlignAllTrailing.");
-            constraint = [self sdal_pinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:peerView];
+            NSAssert(axis == SDALAxisVertical, @"Cannot align views that are distributed horizontally with NSLayoutFormatAlignAllTrailing.");
+            constraint = [self sdal_pinEdge:SDALEdgeTrailing toEdge:SDALEdgeTrailing ofView:peerView];
             break;
         default:
             NSAssert(nil, @"Unsupported alignment option.");

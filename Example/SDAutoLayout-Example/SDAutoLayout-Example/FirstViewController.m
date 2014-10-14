@@ -39,13 +39,13 @@
     }
     
     // Lay them all out so their centers are aligned to each other
-    __block NSArray* alignmentConstraints = [allViews sdal_distributeViewsAlongAxis:ALAxisVertical withFixedSpacing:inset insetSpacing:YES matchedSizes:NO alignment:NSLayoutFormatAlignAllCenterX];
+    __block NSArray* alignmentConstraints = [allViews sdal_distributeViewsAlongAxis:SDALAxisVertical withFixedSpacing:inset insetSpacing:YES matchedSizes:NO alignment:NSLayoutFormatAlignAllCenterX];
     
     // After a few seconds, animate them into different widths, while making them left aligned
     NSUInteger timeInSeconds = 3;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [scrollView removeConstraints:alignmentConstraints];
-        alignmentConstraints = [allViews sdal_distributeViewsAlongAxis:ALAxisVertical withFixedSpacing:inset insetSpacing:YES matchedSizes:NO alignment:NSLayoutFormatAlignAllLeft];
+        alignmentConstraints = [allViews sdal_distributeViewsAlongAxis:SDALAxisVertical withFixedSpacing:inset insetSpacing:YES matchedSizes:NO alignment:NSLayoutFormatAlignAllLeft];
         [UIView animateWithDuration:1.0f animations:^{
             for (UIView* aView in allViews)
             {
@@ -66,10 +66,10 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:1.0f animations:^{
             [scrollView removeConstraints:alignmentConstraints];
-            alignmentConstraints = [allViews sdal_distributeViewsAlongAxis:ALAxisVertical withFixedSpacing:inset insetSpacing:YES matchedSizes:NO alignment:NSLayoutFormatAlignAllCenterX];
+            alignmentConstraints = [allViews sdal_distributeViewsAlongAxis:SDALAxisVertical withFixedSpacing:inset insetSpacing:YES matchedSizes:NO alignment:NSLayoutFormatAlignAllCenterX];
             for (UIView* aView in allViews)
             {
-                [aView sdal_alignAxisToSuperviewAxis:ALAxisVertical];
+                [aView sdal_alignAxisToSuperviewAxis:SDALAxisVertical];
             }
             [self.view layoutIfNeeded];
         }];

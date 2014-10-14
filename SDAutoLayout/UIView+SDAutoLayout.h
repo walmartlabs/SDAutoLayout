@@ -96,64 +96,64 @@
 - (NSArray *)sdal_centerInSuperview;
 
 /** Aligns the view to the same axis of its superview. */
-- (NSLayoutConstraint *)sdal_alignAxisToSuperviewAxis:(ALAxis)axis;
+- (NSLayoutConstraint *)sdal_alignAxisToSuperviewAxis:(SDALAxis)axis;
 
 
 #pragma mark Pin Edges to Superview
 
 /** Pins the given edge of the view to the same edge of its superview. */
-- (NSLayoutConstraint *)sdal_pinEdgeToSuperviewEdge:(ALEdge)edge;
+- (NSLayoutConstraint *)sdal_pinEdgeToSuperviewEdge:(SDALEdge)edge;
 
 /** Pins the given edge of the view to the same edge of its superview with an inset. */
-- (NSLayoutConstraint *)sdal_pinEdgeToSuperviewEdge:(ALEdge)edge withInset:(CGFloat)inset;
+- (NSLayoutConstraint *)sdal_pinEdgeToSuperviewEdge:(SDALEdge)edge withInset:(CGFloat)inset;
 
 /** Pins the given edge of the view to the same edge of its superview with an inset as a maximum or minimum. */
-- (NSLayoutConstraint *)sdal_pinEdgeToSuperviewEdge:(ALEdge)edge withInset:(CGFloat)inset relation:(NSLayoutRelation)relation;
+- (NSLayoutConstraint *)sdal_pinEdgeToSuperviewEdge:(SDALEdge)edge withInset:(CGFloat)inset relation:(NSLayoutRelation)relation;
 
 /** Pins the edges of the view to the edges of its superview with the given edge insets. */
 - (NSArray *)sdal_pinEdgesToSuperviewEdgesWithInsets:(UIEdgeInsets)insets;
 
 /** Pins 3 of the 4 edges of the view to the edges of its superview with the given edge insets, excluding one edge. */
-- (NSArray *)sdal_pinEdgesToSuperviewEdgesWithInsets:(UIEdgeInsets)insets excludingEdge:(ALEdge)edge;
+- (NSArray *)sdal_pinEdgesToSuperviewEdgesWithInsets:(UIEdgeInsets)insets excludingEdge:(SDALEdge)edge;
 
 
 #pragma mark Pin Edges
 
 /** Pins an edge of the view to a given edge of another view. */
-- (NSLayoutConstraint *)sdal_pinEdge:(ALEdge)edge toEdge:(ALEdge)toEdge ofView:(UIView *)peerView;
+- (NSLayoutConstraint *)sdal_pinEdge:(SDALEdge)edge toEdge:(SDALEdge)toEdge ofView:(UIView *)peerView;
 
 /** Pins an edge of the view to a given edge of another view with an offset. */
-- (NSLayoutConstraint *)sdal_pinEdge:(ALEdge)edge toEdge:(ALEdge)toEdge ofView:(UIView *)peerView withOffset:(CGFloat)offset;
+- (NSLayoutConstraint *)sdal_pinEdge:(SDALEdge)edge toEdge:(SDALEdge)toEdge ofView:(UIView *)peerView withOffset:(CGFloat)offset;
 
 /** Pins an edge of the view to a given edge of another view with an offset as a maximum or minimum. */
-- (NSLayoutConstraint *)sdal_pinEdge:(ALEdge)edge toEdge:(ALEdge)toEdge ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation;
+- (NSLayoutConstraint *)sdal_pinEdge:(SDALEdge)edge toEdge:(SDALEdge)toEdge ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation;
 
 
 #pragma mark Align Axes
 
 /** Aligns an axis of the view to the same axis of another view. */
-- (NSLayoutConstraint *)sdal_alignAxis:(ALAxis)axis toSameAxisOfView:(UIView *)peerView;
+- (NSLayoutConstraint *)sdal_alignAxis:(SDALAxis)axis toSameAxisOfView:(UIView *)peerView;
 
 /** Aligns an axis of the view to the same axis of another view with an offset. */
-- (NSLayoutConstraint *)sdal_alignAxis:(ALAxis)axis toSameAxisOfView:(UIView *)peerView withOffset:(CGFloat)offset;
+- (NSLayoutConstraint *)sdal_alignAxis:(SDALAxis)axis toSameAxisOfView:(UIView *)peerView withOffset:(CGFloat)offset;
 
 
 #pragma mark Match Dimensions
 
 /** Matches a dimension of the view to a given dimension of another view. */
-- (NSLayoutConstraint *)sdal_matchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView;
+- (NSLayoutConstraint *)sdal_matchDimension:(SDALDimension)dimension toDimension:(SDALDimension)toDimension ofView:(UIView *)peerView;
 
 /** Matches a dimension of the view to a given dimension of another view with an offset. */
-- (NSLayoutConstraint *)sdal_matchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView withOffset:(CGFloat)offset;
+- (NSLayoutConstraint *)sdal_matchDimension:(SDALDimension)dimension toDimension:(SDALDimension)toDimension ofView:(UIView *)peerView withOffset:(CGFloat)offset;
 
 /** Matches a dimension of the view to a given dimension of another view with an offset as a maximum or minimum. */
-- (NSLayoutConstraint *)sdal_matchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation;
+- (NSLayoutConstraint *)sdal_matchDimension:(SDALDimension)dimension toDimension:(SDALDimension)toDimension ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation;
 
 /** Matches a dimension of the view to a multiple of a given dimension of another view. */
-- (NSLayoutConstraint *)sdal_matchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier;
+- (NSLayoutConstraint *)sdal_matchDimension:(SDALDimension)dimension toDimension:(SDALDimension)toDimension ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier;
 
 /** Matches a dimension of the view to a multiple of a given dimension of another view as a maximum or minimum. */
-- (NSLayoutConstraint *)sdal_matchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier relation:(NSLayoutRelation)relation;
+- (NSLayoutConstraint *)sdal_matchDimension:(SDALDimension)dimension toDimension:(SDALDimension)toDimension ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier relation:(NSLayoutRelation)relation;
 
 
 #pragma mark Set Dimensions
@@ -162,38 +162,38 @@
 - (NSArray *)sdal_setDimensionsToSize:(CGSize)size;
 
 /** Sets the given dimension of the view to a specific size. */
-- (NSLayoutConstraint *)sdal_setDimension:(ALDimension)dimension toSize:(CGFloat)size;
+- (NSLayoutConstraint *)sdal_setDimension:(SDALDimension)dimension toSize:(CGFloat)size;
 
 /** Sets the given dimension of the view to a specific size as a maximum or minimum. */
-- (NSLayoutConstraint *)sdal_setDimension:(ALDimension)dimension toSize:(CGFloat)size relation:(NSLayoutRelation)relation;
+- (NSLayoutConstraint *)sdal_setDimension:(SDALDimension)dimension toSize:(CGFloat)size relation:(NSLayoutRelation)relation;
 
 
 #pragma mark Set Content Compression Resistance & Hugging
 
 /** Sets the priority of content compression resistance for an axis.
     NOTE: This method must only be called from within the block passed into the method +[autoSetPriority:forConstraints:] */
-- (void)sdal_setContentCompressionResistancePriorityForAxis:(ALAxis)axis;
+- (void)sdal_setContentCompressionResistancePriorityForAxis:(SDALAxis)axis;
 
 /** Sets the priority of content hugging for an axis.
     NOTE: This method must only be called from within the block passed into the method +[autoSetPriority:forConstraints:] */
-- (void)sdal_setContentHuggingPriorityForAxis:(ALAxis)axis;
+- (void)sdal_setContentHuggingPriorityForAxis:(SDALAxis)axis;
 
 
 #pragma mark Constrain Any Attributes
 
-/** Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view. */
+/** Constrains an attribute (any SDALEdge, SDALAxis, or SDALDimension) of the view to a given attribute of another view. */
 - (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(UIView *)peerView;
 
-/** Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view with an offset. */
+/** Constrains an attribute (any SDALEdge, SDALAxis, or SDALDimension) of the view to a given attribute of another view with an offset. */
 - (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(UIView *)peerView withOffset:(CGFloat)offset;
 
-/** Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view with an offset as a maximum or minimum. */
+/** Constrains an attribute (any SDALEdge, SDALAxis, or SDALDimension) of the view to a given attribute of another view with an offset as a maximum or minimum. */
 - (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation;
 
-/** Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view with a multiplier. */
+/** Constrains an attribute (any SDALEdge, SDALAxis, or SDALDimension) of the view to a given attribute of another view with a multiplier. */
 - (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier;
 
-/** Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view with a multiplier as a maximum or minimum. */
+/** Constrains an attribute (any SDALEdge, SDALAxis, or SDALDimension) of the view to a given attribute of another view with a multiplier as a maximum or minimum. */
 - (NSLayoutConstraint *)sdal_constrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier relation:(NSLayoutRelation)relation;
 
 

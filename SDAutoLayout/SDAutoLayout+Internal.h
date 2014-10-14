@@ -40,15 +40,15 @@
  */
 @interface UIView (SDAutoLayoutInternal)
 
-+ (NSLayoutAttribute)al_attributeForEdge:(ALEdge)edge;
-+ (NSLayoutAttribute)al_attributeForAxis:(ALAxis)axis;
-+ (NSLayoutAttribute)al_attributeForDimension:(ALDimension)dimension;
-+ (NSLayoutAttribute)al_attributeForALAttribute:(NSInteger)ALAttribute;
-+ (UILayoutConstraintAxis)al_constraintAxisForAxis:(ALAxis)axis;
++ (NSLayoutAttribute)al_attributeForEdge:(SDALEdge)edge;
++ (NSLayoutAttribute)al_attributeForAxis:(SDALAxis)axis;
++ (NSLayoutAttribute)al_attributeForDimension:(SDALDimension)dimension;
++ (NSLayoutAttribute)al_attributeForSDALAttribute:(NSInteger)SDALAttribute;
++ (UILayoutConstraintAxis)al_constraintAxisForAxis:(SDALAxis)axis;
 
 - (void)al_addConstraintUsingGlobalPriority:(NSLayoutConstraint *)constraint;
 - (UIView *)al_commonSuperviewWithView:(UIView *)peerView;
-- (NSLayoutConstraint *)al_alignToView:(UIView *)peerView withOption:(NSLayoutFormatOptions)alignment forAxis:(ALAxis)axis;
+- (NSLayoutConstraint *)al_alignToView:(UIView *)peerView withOption:(NSLayoutFormatOptions)alignment forAxis:(SDALAxis)axis;
 
 @end
 
